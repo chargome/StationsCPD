@@ -6,12 +6,12 @@ namespace Stations.Model
     {
         public Coordinate(long lat, long lon)
         {
-            this.latitude = lat;
-            this.longitude = lon;
+            this.Latitude = lat;
+            this.Longitude = lon;
         }
 
-        private long latitude { get; set;}
-        private long longitude { get; set;}
+        public long Latitude { get; set;}
+        public long Longitude { get; set;}
 
     }
 }

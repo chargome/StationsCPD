@@ -3,11 +3,13 @@ namespace Stations.Model
 {
     public class Line
     {
-        public Line(String name)
+        public Line(int id, String name)
         {
-            this.name = name;
+            this.Id = id;
+            this.Name = name;
         }
 
-        private String name { get; set;}
+        public int Id { get; set; }
+        public String Name { get; set;}
     }
 }

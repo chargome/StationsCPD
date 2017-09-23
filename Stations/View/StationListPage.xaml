@@ -1,6 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage Title="Yo" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Stations.View.StationListPage">
+<ContentPage    xmlns="http://xamarin.com/schemas/2014/forms" 
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+                x:Class="Stations.View.StationListPage"
+                Title="{Binding Title}"
+    >
 	<ContentPage.Content>
-        <Button Text="Click me" Clicked="Handle_Clicked"/>
+    <!--
+        <ListView ItemsSource="{Binding StationList}"
+                   HasUnevenRows="true">
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal">
+                           <Label Text="{Binding Name}"/>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView>
+        -->
+
+        <ListView x:Name="stationsListView"
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="FillAndExpand"
+                  HasUnevenRows="true"
+                  ItemsSource="{Binding StationList}"
+                  ItemSelected="OnItemSelected">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="10">
+                            <Label Text="{Binding Name}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 	</ContentPage.Content>
 </ContentPage>

@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage Title="Details" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Stations.View.StationDetailPage">
+<ContentPage 
+    Title="{Binding Title}" 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="Stations.View.StationDetailPage">
 	<ContentPage.Content>
-        <Label Text="DetailsPage"/>
+        <StackLayout HorizontalOptions="FillAndExpand"
+                     VerticalOptions="FillAndExpand"
+                     Padding="10">
+            
+            <Label Text="{Binding Name}" FontSize="24" FontAttributes="Bold"/>
+            <Label Text="Latitude:" TextColor="Purple"/>
+            <Label Text="{Binding Latitude}"/>
+            <Label Text="Longitude:" TextColor="Purple"/>
+            <Label Text="{Binding Longitude}"/>
+            <Label Text="Operating Lines:" TextColor="Purple"/>
+            <Label Text="{Binding Lines}"/>
+         </StackLayout>
+       
 	</ContentPage.Content>
 </ContentPage>

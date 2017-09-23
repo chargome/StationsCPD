@@ -5,16 +5,18 @@ namespace Stations.Model
 {
     public class Station
     {
-        public Station(String name, Coordinate cdn, List<Line> lines)
+        public Station(int id, String name, Coordinate cdn, List<Line> lines)
         {
-            this.name = name;
-            this.coordinate = coordinate;
-            this.lines = lines;
+            this.Id = id;
+            this.Name = name;
+            this.Coordinate = cdn;
+            this.Lines = lines;
         }
 
-        private String name { get; set; }
-        private Coordinate coordinate { get; set; }
-        private List<Line> lines { get; set; }
+        public int Id { get; set; }
+        public String Name { get; set; }
+        public Coordinate Coordinate { get; set; }
+        public List<Line> Lines { get; set; }
 
     }
 }
