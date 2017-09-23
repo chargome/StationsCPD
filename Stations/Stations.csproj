@@ -30,6 +30,12 @@
   <ItemGroup>
     <EmbeddedResource Include="App.xaml" />
     <EmbeddedResource Include="StationsPage.xaml" />
+    <EmbeddedResource Include="View\StationListPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\StationDetailPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -42,6 +48,12 @@
     <Compile Include="Model\Station.cs" />
     <Compile Include="Model\Coordinate.cs" />
     <Compile Include="Model\Line.cs" />
+    <Compile Include="View\StationListPage.xaml.cs">
+      <DependentUpon>StationListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\StationDetailPage.xaml.cs">
+      <DependentUpon>StationDetailPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

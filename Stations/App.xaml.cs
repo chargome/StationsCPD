@@ -8,7 +8,7 @@ namespace Stations
         {
             InitializeComponent();
 
-            MainPage = new StationsPage();
+            MainPage = new NavigationPage(new View.StationListPage());
         }
 
         protected override void OnStart()
