@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Stations.Droid</RootNamespace>
     <AssemblyName>Stations.Droid</AssemblyName>
-    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -81,6 +81,12 @@
     <Reference Include="Xamarin.Forms.Xaml">
       <HintPath>..\packages\Xamarin.Forms.2.3.4.247\lib\MonoAndroid10\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
+    <Reference Include="Plugin.Settings.Abstractions">
+      <HintPath>..\packages\Xam.Plugins.Settings.3.0.1\lib\MonoAndroid10\Plugin.Settings.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Settings">
+      <HintPath>..\packages\Xam.Plugins.Settings.3.0.1\lib\MonoAndroid10\Plugin.Settings.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Stations\Stations.csproj">
@@ -92,6 +98,10 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Helpers\Settings.cs" />
+    <Compile Include="SettingsActivity.cs" />
+    <Compile Include="SettingsFragment.cs" />
+    <Compile Include="SettingsService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -107,6 +117,23 @@
     <AndroidResource Include="Resources\drawable-hdpi\icon.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\icon.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\icon.png" />
+    <AndroidResource Include="Resources\layout\activity_settings.xml" />
+    <AndroidResource Include="Resources\drawable\metro.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\metro.png" />
+    <AndroidResource Include="Resources\drawable\strain.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\strain.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\strain.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\strain.png" />
+    <AndroidResource Include="Resources\drawable\merged.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\merged.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\merged.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\merged.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\metro.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\metro.png" />
+    <AndroidResource Include="Resources\xml\preference_main.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\xml\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" />

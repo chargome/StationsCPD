@@ -8,14 +8,48 @@
         <StackLayout HorizontalOptions="FillAndExpand"
                      VerticalOptions="FillAndExpand"
                      Padding="10">
-            
-            <Label Text="{Binding Name}" FontSize="24" FontAttributes="Bold"/>
-            <Label Text="Latitude:" TextColor="Purple"/>
-            <Label Text="{Binding Latitude}"/>
-            <Label Text="Longitude:" TextColor="Purple"/>
-            <Label Text="{Binding Longitude}"/>
-            <Label Text="Operating Lines:" TextColor="Purple"/>
-            <Label Text="{Binding Lines}"/>
+            <StackLayout
+                Orientation="Horizontal">
+
+                <Image
+                    Source="{Binding ImageSource}"
+                    HeightRequest="30"
+                    WidthRequest="30"
+                    Aspect="AspectFit"/>
+                    
+                <Label  Text="{Binding Name}" 
+                        FontSize="30" 
+                        FontAttributes="Bold"
+                        TextColor="Purple"/>
+                
+            </StackLayout>
+            <StackLayout
+                Orientation="Horizontal"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <StackLayout
+                    Orientation="Vertical"
+                    HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                    
+                    <Label Text="Latitude:" TextColor="Purple"/>
+                    <Label Text="{Binding Latitude}"/>
+                    <Label Text="Longitude:" TextColor="Purple"/>
+                    <Label Text="{Binding Longitude}"/>
+                    <Label Text="Distance:" TextColor="Purple"/>
+                    <Label Text="{Binding Distance}"/>
+                    
+                </StackLayout>
+                <StackLayout
+                    Orientation="Vertical"
+                    HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                    
+                    <Label Text="Lines:" TextColor="Purple"/>
+                    <Label Text="{Binding Lines}"/>
+                    
+                </StackLayout>
+            </StackLayout>
          </StackLayout>
        
 	</ContentPage.Content>

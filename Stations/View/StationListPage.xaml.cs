@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Stations.Model;
+using Stations.Settings;
 using Stations.Viewmodel;
 using Xamarin.Forms;
 
@@ -19,8 +20,26 @@ namespace Stations.View
             BindingContext = viewModel = new StationListViewModel();
         }
 
-        async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
-        {
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
+
+			if (viewModel.StationList.Count == 0)
+				viewModel.RefreshCommand.Execute(null);
+
+			SettingsButton.IsVisible =
+			  DependencyService.Get<ISettingsService>().
+			  SettingsDisplayDialogAvailable;
+		}
+
+		void Handle_Clicked(object sender, System.EventArgs e)
+		{
+			DependencyService.Get<ISettingsService>().
+				 DisplaySettings();
+		}
+
+		async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
+		{
 			var item = args.SelectedItem as Station;
 
 			if (item == null)
@@ -28,15 +47,16 @@ namespace Stations.View
 
 			if (ItemSelected == null)
 			{
-                var DetailPage = new NavigationPage(new StationDetailPage(new StationDetailViewModel(item)));
+				var DetailPage = new StationDetailPage(new StationDetailViewModel(item));
 				await Navigation.PushAsync(DetailPage);
-                StationsListView.SelectedItem = null;
+				StationsListView.SelectedItem = null;
 			}
 			else
 			{
-                // todo wos is des
-                ItemSelected.Invoke(new StationDetailPage(new StationDetailViewModel(item)));
+				ItemSelected.Invoke(new StationDetailPage(new StationDetailViewModel(item)));
 			}
-        }
+		}
+
+
     }
 }

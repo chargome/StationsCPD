@@ -2,21 +2,24 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using Stations.Model;
+using Stations.Service;
 using Stations.Viewmodel;
+using Xamarin.Forms;
+
+
 
 namespace Stations
 {
-    public class StationDetailViewModel : IViewModel
+    public class StationDetailViewModel : BaseViewModel
     {
-        Station Model { get; set; }
+        public ILocationService locationService = DependencyService.Get<ILocationService>();
 
         public StationDetailViewModel(Station station)
         {
             this.Model = station;
-            this.Title = "Details";
         }
 
-        public String Title { get; }
+        Station Model { get; set; }
 
         public String Name
         {
@@ -42,17 +45,29 @@ namespace Stations
         {
             get
             {
-                String lines = String.Empty;
-
-                foreach(var line in Model.Lines)
-                {
-                    lines += line.Name + " ";
-                }
-
-                return lines;
+                return Model.Lines;
             }   
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public String Distance
+        {
+            get
+            {
+                return Model.Distance.ToString() + " km";   
+            }
+        }
+
+        public String ImageSource
+        {
+            get
+            {
+                return Model.ImageSource;    
+            }
+        }
+
+
+
+		
+
     }
 }

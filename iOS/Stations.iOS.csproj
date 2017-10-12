@@ -93,6 +93,12 @@
     <Reference Include="Xamarin.Forms.Xaml">
       <HintPath>..\packages\Xamarin.Forms.2.3.4.247\lib\Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
+    <Reference Include="Plugin.Settings.Abstractions">
+      <HintPath>..\packages\Xam.Plugins.Settings.3.0.1\lib\Xamarin.iOS10\Plugin.Settings.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Settings">
+      <HintPath>..\packages\Xam.Plugins.Settings.3.0.1\lib\Xamarin.iOS10\Plugin.Settings.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Stations\Stations.csproj">
@@ -103,9 +109,19 @@
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\metro.png.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\metro.png.imageset\metro.png" />
+    <ImageAsset Include="Assets.xcassets\strain.png.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\strain.png.imageset\strain.png" />
+    <ImageAsset Include="Assets.xcassets\merged.png.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\merged.png.imageset\merged.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="Service\" />
+    <Folder Include="Assets.xcassets\metro.png.imageset\" />
+    <Folder Include="Assets.xcassets\strain.png.imageset\" />
+    <Folder Include="Assets.xcassets\merged.png.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -118,6 +134,12 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Helpers\Settings.cs" />
+    <Compile Include="SettingsService.cs" />
+    <Compile Include="Service\LocationService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Settings.bundle\Root.plist" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

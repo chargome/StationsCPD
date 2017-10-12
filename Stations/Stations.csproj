@@ -55,7 +55,12 @@
     <Compile Include="Service\IDatasource.cs" />
     <Compile Include="Service\MockStationsDataService.cs" />
     <Compile Include="Viewmodel\BaseViewModel.cs" />
-    <Compile Include="Viewmodel\IViewModel.cs" />
+    <Compile Include="Service\JSONDataService.cs" />
+    <Compile Include="Helper\JsonParser.cs" />
+    <Compile Include="Settings\SystemSettings.cs" />
+    <Compile Include="Settings\ISettingsService.cs" />
+    <Compile Include="Service\ILocationService.cs" />
+    <Compile Include="Helper\DistanceCalculator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
@@ -67,6 +72,15 @@
     <Reference Include="Xamarin.Forms.Xaml">
       <HintPath>..\packages\Xamarin.Forms.2.3.4.247\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\portable-net45+win8+wp8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Settings.Abstractions">
+      <HintPath>..\packages\Xam.Plugins.Settings.3.0.1\lib\netstandard1.0\Plugin.Settings.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Settings">
+      <HintPath>..\packages\Xam.Plugins.Settings.3.0.1\lib\netstandard1.0\Plugin.Settings.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -76,6 +90,8 @@
     <Folder Include="View\" />
     <Folder Include="Viewmodel\" />
     <Folder Include="Service\" />
+    <Folder Include="Helper\" />
+    <Folder Include="Settings\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

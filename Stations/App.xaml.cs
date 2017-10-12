@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using Stations.Service;
+using Xamarin.Forms;
 
 namespace Stations
 {
@@ -7,9 +8,13 @@ namespace Stations
         public App()
         {
             InitializeComponent();
+            DependencyService.Register<JSONDataService>();
 
             MainPage = new NavigationPage(new View.StationListPage());
         }
+
+        // todo xaml compilation here
+        // todo images: only lowercase letters + underscores
 
         protected override void OnStart()
         {
@@ -23,7 +28,9 @@ namespace Stations
 
         protected override void OnResume()
         {
-            // Handle when your app resumes
+			DependencyService.Register<JSONDataService>();
+
+			MainPage = new NavigationPage(new View.StationListPage());
         }
     }
 }

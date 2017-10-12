@@ -17,22 +17,71 @@
             </DataTemplate>
         </ListView>
         -->
+        <StackLayout
+        Orientation="Vertical"
+        Padding="1">
 
-        <ListView x:Name="stationsListView"
-                  HorizontalOptions="FillAndExpand"
-                  VerticalOptions="FillAndExpand"
-                  HasUnevenRows="true"
-                  ItemsSource="{Binding StationList}"
-                  ItemSelected="OnItemSelected">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Padding="10">
-                            <Label Text="{Binding Name}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" />
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            <Button Text="Settings"
+                    Clicked="Handle_Clicked"
+                    x:Name="SettingsButton"/>
+            
+            <ListView x:Name="stationsListView"
+                      HorizontalOptions="FillAndExpand"
+                      VerticalOptions="FillAndExpand"
+                      HasUnevenRows="true"
+                      ItemsSource="{Binding StationList}"
+                      ItemSelected="OnItemSelected"
+                      IsPullToRefreshEnabled="true"
+                      RefreshCommand="{Binding RefreshCommand}"
+                      IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                      >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="10">
+
+                                <StackLayout
+                                    Orientation="Horizontal">
+
+                                    <Image
+                                        Source="{Binding ImageSource}"
+                                        Aspect="AspectFit"
+                                        WidthRequest="30"
+                                        HeightRequest="30"
+                                        />
+                                
+                                    <Label Text="{Binding Name}" 
+                                        VerticalOptions="FillAndExpand"
+                                        HorizontalOptions="FillAndExpand" 
+                                        VerticalTextAlignment="Center"
+                                        TextColor="Purple"
+                                        FontSize="20"/>
+                                         
+                                </StackLayout>
+
+                                <StackLayout
+                                    Grid.Row="1"
+                                    Spacing="0"
+                                    Orientation="Horizontal">
+                                    
+                                    <Label
+                                        Text="{Binding Distance}"
+                                        FontSize="15"
+                                        />
+                                    
+                                    <Label
+                                        Text="km"
+                                        FontSize="15"
+                                        />
+                                    
+                                </StackLayout>
+    
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
+        </StackLayout>
 	</ContentPage.Content>
 </ContentPage>

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Stations.Model;
 
 namespace Stations
 {
-    public interface IDatasource
+    public interface IDatasource<T>
     {
-       List<Station> GetStations();
+        Task<ObservableCollection<T>> GetStationsAsync();
     }
 }

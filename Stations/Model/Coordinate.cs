@@ -4,14 +4,14 @@ namespace Stations.Model
 {
     public class Coordinate
     {
-        public Coordinate(long lat, long lon)
+        public Coordinate(double lat, double lon)
         {
             this.Latitude = lat;
             this.Longitude = lon;
         }
 
-        public long Latitude { get; set;}
-        public long Longitude { get; set;}
+        public double Latitude { get; set;}
+        public double Longitude { get; set;}
 
     }
 }
