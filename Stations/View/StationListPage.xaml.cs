@@ -11,7 +11,7 @@ namespace Stations.View
     {
         StationListViewModel viewModel;
 
-        public Action<StationDetailPage> ItemSelected { get; set; }
+        public Action<StationDetailPage> ItemSelected { get; set; } 
         public ListView StationsListView { get { return stationsListView; }}
 
         public StationListPage()
@@ -56,6 +56,8 @@ namespace Stations.View
 				ItemSelected.Invoke(new StationDetailPage(new StationDetailViewModel(item)));
 			}
 		}
+
+
 
 
     }

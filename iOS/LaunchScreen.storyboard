@@ -24,4 +24,9 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="metro.png" width="500" height="500"/>
+        <image name="strain.png" width="2000" height="2000"/>
+        <image name="merged.png" width="1750" height="1000"/>
+    </resources>
 </document>

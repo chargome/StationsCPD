@@ -21,7 +21,7 @@ namespace Stations.Droid
         {
             base.OnCreate(savedInstanceState);
 
-            AddPreferencesFromResource(Resource.Layout.activity_settings);
+            AddPreferencesFromResource(Resource.Xml.preference_main);
         }
     }
 }

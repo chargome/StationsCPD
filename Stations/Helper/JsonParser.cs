@@ -22,8 +22,7 @@ namespace Stations
         {
 			ObservableCollection<Station> allStations = new ObservableCollection<Station>();
             ObservableCollection<Station> finalStations = new ObservableCollection<Station>();
-            
-			
+
             var testObject = JsonConvert.DeserializeObject<dynamic>(strJSON);
 
             // first loop filters for redundant stations
@@ -63,6 +62,8 @@ namespace Stations
 
             char[] criteria = new char[2];
 
+
+            // Filter from settings
             if(SystemSettings.MetroVisible)
             {
                 criteria[0] = 'U';
@@ -78,6 +79,7 @@ namespace Stations
             {
                 bool final = false;
 
+                // check which icon is used
                 if(station.Lines.IndexOf(criteria[0]) >= 0 &&
                    station.Lines.IndexOf(criteria[1]) >= 0)
                 {
@@ -97,18 +99,6 @@ namespace Stations
 
                 if (final)
                 {
-                    //calculate distance to device distance
-                    Coordinate myPosition = DependencyService
-                        .Get<ILocationService>()
-                        .GetMockLocation();
-
-                    station.Distance = Math.Round(DistanceCalculator
-                                   .DistanceBetweenPoints(
-                                                    station.Coordinate.Longitude,
-                                                    station.Coordinate.Latitude,
-                                                    myPosition.Longitude,
-                                                    myPosition.Latitude), 1);
-                    
                     finalStations.Add(station);
                 }
             }

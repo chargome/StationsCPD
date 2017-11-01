@@ -27,7 +27,7 @@ namespace Stations.Helper
 
             double dist = R * d;
 
-            return dist;
+            return Math.Round(dist,2);
 
 
         }

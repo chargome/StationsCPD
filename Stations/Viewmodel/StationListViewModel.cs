@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using Stations.Helper;
 using Stations.Model;
 using Stations.Service;
 using Xamarin.Forms;
@@ -11,6 +12,21 @@ namespace Stations.Viewmodel
 {
     public class StationListViewModel : BaseViewModel
     {
+        Coordinate _location;
+        public Coordinate Location
+        {
+            get
+            {
+                return _location;
+            }
+
+            set
+            {
+                _location = value;
+                CalculateDistancesInModel();
+            }
+        }
+
         ObservableCollection<Station> _stationList;
 		public ObservableCollection<Station> StationList
 		{
@@ -21,9 +37,10 @@ namespace Stations.Viewmodel
 			set
 			{
 				_stationList = value;
-				OnPropertyChanged(nameof(StationList));
+                OnPropertyChanged(nameof(StationList));
 			}
 		}
+
 
 		Command _refreshCommand;
 		public Command RefreshCommand
@@ -39,19 +56,27 @@ namespace Stations.Viewmodel
 		}
 
 
-		// constructor
-		public StationListViewModel()
-		{
-			Title = "Stations";
+        // constructor
+        public StationListViewModel()
+        {
+            Title = "Stations";
 
-			_stationList = new ObservableCollection<Station>();
-			_refreshCommand = new Command(async () => await Task.Run(() => ExecuteRefreshCommand()));
-		}
+            _stationList = new ObservableCollection<Station>();
+            _refreshCommand = new Command(async () => await Task.Run(() => ExecuteRefreshCommand()));
+
+            // receive locationn upates
+            MessagingCenter.Subscribe<ILocationService, Coordinate>(this, "deviceLocation", (sender, coordinate) => 
+            {
+                //System.Diagnostics.Debug.WriteLine("Received location: " 
+                // + coordinate.Latitude + coordinate.Longitude);
+                Location = coordinate;
+            });
+        }
 
 
 
-		// other methods
-		async Task ExecuteRefreshCommand()
+        // other methods
+        async Task ExecuteRefreshCommand()
 		{
 			if (IsBusy)
 				return;
@@ -61,8 +86,27 @@ namespace Stations.Viewmodel
 			// execute
 			StationList = await Datasource.GetStationsAsync();
 
+            //calculate distances
+            //CalculateDistancesInModel();
+
 			IsBusy = false;
 		}
+
+        private void CalculateDistancesInModel()
+        {
+            //System.Diagnostics.Debug.WriteLine("Calculating distances");
+
+            foreach (Station station in StationList)
+            {
+                station.Distance = DistanceCalculator.DistanceBetweenPoints(
+                    Location.Longitude, Location.Latitude,
+                    station.Coordinate.Longitude,
+                    station.Coordinate.Latitude);
+
+            }
+
+            OnPropertyChanged(nameof(StationList));
+        }
 
 
 
