@@ -14,10 +14,11 @@ namespace Stations.View
         public Action<StationDetailPage> ItemSelected { get; set; } 
         public ListView StationsListView { get { return stationsListView; }}
 
-        public StationListPage()
+        public StationListPage(StationListViewModel viewmodel)
         {
             InitializeComponent();
-            BindingContext = viewModel = new StationListViewModel();
+            viewModel = viewmodel;
+            BindingContext = viewModel;
         }
 
 		protected override void OnAppearing()
@@ -25,8 +26,11 @@ namespace Stations.View
 			base.OnAppearing();
 
 			if (viewModel.StationList.Count == 0)
-				viewModel.RefreshCommand.Execute(null);
-
+            {
+                viewModel.RefreshCommand.Execute(null); 
+            }
+		        
+            //System.Diagnostics.Debug.WriteLine("Listpage appearing..");
 			SettingsButton.IsVisible =
 			  DependencyService.Get<ISettingsService>().
 			  SettingsDisplayDialogAvailable;

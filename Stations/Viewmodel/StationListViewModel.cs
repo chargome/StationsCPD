@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 using Stations.Helper;
 using Stations.Model;
@@ -64,7 +65,7 @@ namespace Stations.Viewmodel
             _stationList = new ObservableCollection<Station>();
             _refreshCommand = new Command(async () => await Task.Run(() => ExecuteRefreshCommand()));
 
-            // receive locationn upates
+            // receive location upates
             MessagingCenter.Subscribe<ILocationService, Coordinate>(this, "deviceLocation", (sender, coordinate) => 
             {
                 //System.Diagnostics.Debug.WriteLine("Received location: " 
@@ -86,9 +87,6 @@ namespace Stations.Viewmodel
 			// execute
 			StationList = await Datasource.GetStationsAsync();
 
-            //calculate distances
-            //CalculateDistancesInModel();
-
 			IsBusy = false;
 		}
 
@@ -106,6 +104,9 @@ namespace Stations.Viewmodel
             }
 
             OnPropertyChanged(nameof(StationList));
+
+            // Sort by distance
+            StationList = new ObservableCollection<Station>(StationList.OrderBy(o => o.Distance).ToList());
         }
 
 

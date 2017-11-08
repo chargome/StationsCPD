@@ -1,4 +1,5 @@
 ﻿using Stations.Service;
+using Stations.View;
 using Xamarin.Forms;
 
 namespace Stations
@@ -12,18 +13,17 @@ namespace Stations
             InitializeComponent();
             DependencyService.Register<JSONDataService>();
 
-            // Initialize and active location service
+            // Initialize and activate location service
             locationService = DependencyService.Get<ILocationService>();
+            MainPage = new MainPage();
             locationService.ActivateLocationManager();
-
-            MainPage = new NavigationPage(new View.StationListPage());
+            //MainPage = new NavigationPage(new View.StationListPage());
         }
 
         // todo xaml compilation here
 
         protected override void OnStart()
         {
-            
         }
 
         protected override void OnSleep()
@@ -35,8 +35,8 @@ namespace Stations
 
         protected override void OnResume()
         {
-			DependencyService.Register<JSONDataService>();
-			MainPage = new NavigationPage(new View.StationListPage());
+            //DependencyService.Register<JSONDataService>();
+            MainPage = new MainPage();
 
             // enable location
             locationService.ActivateLocationManager();

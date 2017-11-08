@@ -3,6 +3,7 @@
     Title="{Binding Title}" 
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
     x:Class="Stations.View.StationDetailPage">
 	<ContentPage.Content>
         <StackLayout HorizontalOptions="FillAndExpand"
@@ -23,6 +24,14 @@
                         TextColor="Purple"/>
                 
             </StackLayout>
+            
+            <maps:Map
+                HorizontalOptions="FillAndExpand"
+                HeightRequest="30"
+                x:Name="DetailMap"
+                MapType="Street"
+            />
+            
             <StackLayout
                 Orientation="Horizontal"
                 HorizontalOptions="FillAndExpand"

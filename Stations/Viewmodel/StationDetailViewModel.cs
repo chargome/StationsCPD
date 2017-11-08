@@ -33,19 +33,25 @@ namespace Stations
 
         public String Latitude
         {
-            get { return Model.Coordinate.Latitude.ToString(); }
+            get 
+            { 
+                return Math.Round(Model.Coordinate.Latitude, 2).ToString(); 
+            }
         }
 
         public String Longitude
         {
-            get { return Model.Coordinate.Longitude.ToString(); }
+            get 
+            {
+                return Math.Round(Model.Coordinate.Longitude, 2).ToString(); 
+            }
         }
 
         public String Lines
         {
             get
             {
-                return Model.Lines;
+                return Model.Lines.Replace(", ", "\n");
             }   
         }
 

@@ -59,6 +59,17 @@ namespace Stations.iOS.Service
         public void ActivateLocationManager()
         {
             manager.StartUpdatingLocation();
+            updateLocationForSeconds(1);
+        }
+
+        private void updateLocationForSeconds(int seconds)
+        {
+            Device.StartTimer(TimeSpan.FromSeconds(seconds), () => 
+            {
+                DeviceLocation = CLLocationToCoordinate(manager.Location);
+                return true;
+            });
+
         }
 
         public void DeactivateLocationManager()

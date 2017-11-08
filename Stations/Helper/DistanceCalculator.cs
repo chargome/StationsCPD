@@ -27,6 +27,7 @@ namespace Stations.Helper
 
             double dist = R * d;
 
+            // Round to two dogits after the comma
             return Math.Round(dist,2);
 
 
