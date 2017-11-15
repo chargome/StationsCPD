@@ -96,6 +96,16 @@ namespace Stations.Droid.Service
             System.Diagnostics.Debug.WriteLine(provider + " availability has changed to " + status.ToString());
         }
 
+        private void updateLocationForSeconds(int seconds)
+        {
+            Device.StartTimer(TimeSpan.FromSeconds(seconds), () =>
+            {
+            //DeviceLocation = new Coordinate(locationManager.GetLastKnownLocation()));
+                return true;
+            });
+
+        }
+
     }
 
 

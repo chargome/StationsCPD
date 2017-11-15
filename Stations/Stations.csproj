@@ -77,6 +77,7 @@
     <Compile Include="View\StationMapPage.xaml.cs">
       <DependentUpon>StationMapPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\CustomMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">

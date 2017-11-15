@@ -117,7 +117,6 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\Contents.json" />
     <ImageAsset Include="Assets.xcassets\metro.png.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\metro.png.imageset\metro.png" />
     <ImageAsset Include="Assets.xcassets\strain.png.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\strain.png.imageset\strain.png" />
     <ImageAsset Include="Assets.xcassets\merged.png.imageset\Contents.json" />
@@ -130,6 +129,13 @@
     <ImageAsset Include="Assets.xcassets\tab_list.png.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\refresh.png.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\refresh.png.imageset\refresh_32px.png" />
+    <ImageAsset Include="Assets.xcassets\metro.png.imageset\metropin.png" />
+    <ImageAsset Include="Assets.xcassets\metropin.png.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\metropin.png.imageset\metropin.png" />
+    <ImageAsset Include="Assets.xcassets\strainpin.png.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\strainpin.png.imageset\strainpin.png" />
+    <ImageAsset Include="Assets.xcassets\mergedpin.png.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\mergedpin.png.imageset\mergedpin.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -140,6 +146,9 @@
     <Folder Include="Assets.xcassets\tab_map.png.imageset\" />
     <Folder Include="Assets.xcassets\tab_list.png.imageset\" />
     <Folder Include="Assets.xcassets\refresh.png.imageset\" />
+    <Folder Include="Assets.xcassets\metropin.png.imageset\" />
+    <Folder Include="Assets.xcassets\strainpin.png.imageset\" />
+    <Folder Include="Assets.xcassets\mergedpin.png.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -156,6 +165,7 @@
     <Compile Include="Service\SettingsService.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Helpers\LocationDelegate.cs" />
+    <Compile Include="Helpers\CustomMapRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Settings.bundle\Root.plist" />

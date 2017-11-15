@@ -166,6 +166,7 @@
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="Helpers\LocationHelper.cs" />
+    <Compile Include="Helpers\CustomMapRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -194,6 +195,9 @@
     <AndroidResource Include="Resources\drawable-xhdpi\tab_list.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\tab_map.png" />
     <AndroidResource Include="Resources\drawable\refresh.png" />
+    <AndroidResource Include="Resources\drawable\metropin.png" />
+    <AndroidResource Include="Resources\drawable\strainpin.png" />
+    <AndroidResource Include="Resources\drawable\mergedpin.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\xml\" />

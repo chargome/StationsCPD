@@ -17,7 +17,7 @@ namespace Stations.View
             viewModel = stationViewmodel;
             BindingContext = viewModel;
 
-            moveMapToCurrentPosition();
+            MoveMapToCurrentPosition();
 
             Map.HasZoomEnabled = true;
             Map.HasScrollEnabled = true;
@@ -27,12 +27,12 @@ namespace Stations.View
             ToolbarItems.Add(new ToolbarItem("Refresh", "refresh.png", () =>
             {
                 Map.Pins.Clear();
-                addPinsFromList();
-                moveMapToCurrentPosition();
+                AddPinsFromList();
+                MoveMapToCurrentPosition();
             }));
         }
 
-        private void moveMapToCurrentPosition()
+        private void MoveMapToCurrentPosition()
         {
             var position = new Position();
 
@@ -61,30 +61,60 @@ namespace Stations.View
             {
                 viewModel.RefreshCommand.Execute(null);    
             }
-            addPinsFromList();
-            moveMapToCurrentPosition();
+            AddPinsFromList();
+            MoveMapToCurrentPosition();
+        }
+
+        private String GetImageString(string lines)
+        {
+            if (lines.Contains("U") && lines.Contains("S"))
+            {
+                return "mergedpin.png";
+            }
+            else if (lines.Contains("U"))
+            {
+                return "metropin.png";
+            }
+            else return "strainpin.png";
         }
 
 
-
-
-        private void addPinsFromList()
+        private void AddPinsFromList()
         {
             foreach(Station station in viewModel.StationList)
             {
                 var position = new Position(station.Coordinate.Latitude, 
                                             station.Coordinate.Longitude);
+                
 
+                var customPin = new CustomPin()
+                {
+                    Pin = new Pin
+                    {
+                        Type = PinType.Place,
+                        Label = station.Name,
+                        Position = position
+                    },
+                    ImageSource = GetImageString(station.Lines)
+                };
+
+                /*
                 var pin = new Pin
                 {
                     Type = PinType.Place,
                     Label = station.Name,
                     Position = position
                 };
-
-
                 Map.Pins.Add(pin);
+                */
+
+                Map.CustomPins.Add(customPin);
+                Map.Pins.Add(customPin.Pin);
+
+
             }
         }
+
+
     }
 }

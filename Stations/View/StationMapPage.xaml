@@ -2,16 +2,26 @@
 <ContentPage 
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-    xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+    xmlns:local="clr-namespace:Stations.Model"
     x:Class="Stations.View.StationMapPage"
     Title="{Binding Title}">
 
+    
+    <!--
+
+    xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+    
     <maps:Map
         HorizontalOptions="FillAndExpand"
         VerticalOptions="FillAndExpand"
         x:Name="Map"
         MapType="Street"
         />
-
-    
+        -->
+    <local:CustomMap
+            x:Name="Map"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            />
+  
 </ContentPage>

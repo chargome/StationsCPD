@@ -19,8 +19,8 @@ namespace Stations.iOS.Service
             manager = new CLLocationManager();
             manager.RequestWhenInUseAuthorization();
             manager.Delegate = this;
-            deviceLocation = CLLocationToCoordinate(manager.Location);
-            System.Diagnostics.Debug.WriteLine(manager.Location.Coordinate.ToString());
+            //deviceLocation = CLLocationToCoordinate(manager.Location);
+            //System.Diagnostics.Debug.WriteLine(manager.Location.Coordinate.ToString());
         }
 
         public Coordinate deviceLocation;
