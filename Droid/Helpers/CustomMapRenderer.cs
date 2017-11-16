@@ -29,7 +29,7 @@ namespace Stations.Droid.Helpers
 
             if (e.OldElement != null)
             {
-                NativeMap.InfoWindowClick -= OnInfoWindowClick;
+                //NativeMap.InfoWindowClick -= OnInfoWindowClick;
             }
 
             if (e.NewElement != null)
@@ -44,44 +44,54 @@ namespace Stations.Droid.Helpers
         {
             base.OnMapReady(map);
 
-            NativeMap.InfoWindowClick += OnInfoWindowClick;
-            NativeMap.SetInfoWindowAdapter(this);
+            //NativeMap.InfoWindowClick += OnInfoWindowClick;
+            //NativeMap.SetInfoWindowAdapter(this);
         }
 
-        /*
+
         protected override MarkerOptions CreateMarker(Pin pin)
         {
+            var customPin = GetCustomPin(pin);
+
+            int source;
+
+            switch(customPin.ImageSource)
+            {
+                case "mergedpin.png":
+                    source = Resource.Drawable.mergedpin;
+                    break;
+                case "metropin.png":
+                    source = Resource.Drawable.metropin;
+                    break;
+                case "strainpin.png":
+                    source = Resource.Drawable.strainpin;
+                    break;
+                default:
+                    source = 0;
+                    break;
+            }
+
             var marker = new MarkerOptions();
+
+            if(source == 0)
+            {
+                marker.SetIcon(BitmapDescriptorFactory.DefaultMarker());
+            }
+            else
+            {
+                marker.SetIcon(BitmapDescriptorFactory.FromResource(source));
+            }
+
             marker.SetPosition(new LatLng(pin.Position.Latitude, pin.Position.Longitude));
             marker.SetTitle(pin.Label);
             marker.SetSnippet(pin.Address);
 
-            //marker.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.pin));
+
             return marker;
         }
-        */
 
 
-        private void OnInfoWindowClick(object sender, GoogleMap.InfoWindowClickEventArgs e)
-        {
-            var customPin = GetCustomPin(e.Marker);
-            if (customPin == null)
-            {
-                throw new Exception("Custom pin not found");
-            }
-
-            if (!string.IsNullOrWhiteSpace(customPin.ImageSource))
-            {
-                var url = Android.Net.Uri.Parse(customPin.ImageSource);
-                var intent = new Intent(Intent.ActionView, url);
-                intent.AddFlags(ActivityFlags.NewTask);
-                Android.App.Application.Context.StartActivity(intent);
-            }
-        } 
-
-
-
-        CustomPin GetCustomPin(Marker annotation)
+        CustomPin GetCustomPin(Pin annotation)
         {
             var position = new Position(annotation.Position.Latitude, annotation.Position.Longitude);
             foreach (var pin in customPins)
