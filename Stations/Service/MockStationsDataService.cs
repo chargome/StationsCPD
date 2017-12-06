@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Stations.Model;
+using Stations.Viewmodel;
 
 namespace Stations.Service
 {
-    public class MockStationsDataService: IDatasource<Station>
+    public class MockStationsDataService: IDatasource<StationViewModel>
     {
         public MockStationsDataService(){}
 
-        public Task<ObservableCollection<Station>> GetStationsAsync()
+        public Task<ObservableCollection<StationViewModel>> GetStationsAsync()
         {
      /*       var u1 = new Line(1, "U1");
             var u2 = new Line(1, "U2");
@@ -21,17 +22,21 @@ namespace Stations.Service
      */
      
             //Create some random stations
-            var stations = new ObservableCollection<Station>
+            var stations = new ObservableCollection<StationViewModel>
             {
-                new Station(1, "Station A", new Coordinate(123,123), "U1, 13A"),
-                new Station(2, "Station B", new Coordinate(312,223), "U1, 13A"),
-                new Station(3, "Station C", new Coordinate(11223,133), "U1, 13A"),
-                new Station(4, "Station D", new Coordinate(1232,133), "U1, 13A"),
-                new Station(5, "Station E", new Coordinate(123234,12133), "U1, 13A")
+                new StationViewModel(new Station(1, "Station A", 48.239, 16.3775, "U1, 13A")),
+                new StationViewModel(new Station(2, "Station B", 48.240, 16.3785, "U1, 13A")),
+                new StationViewModel(new Station(3, "Station C", 48.241, 16.3779, "U1, 13A")),
+                new StationViewModel(new Station(4, "Station D", 48.242, 16.3781, "U1, 13A")),
+                new StationViewModel(new Station(5, "Station E", 48.243, 16.3785, "U1, 13A"))
 			};
 
             return Task.FromResult(stations);
         }
 
+        public Task UpdateStationsFromApiAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -8,7 +8,8 @@ namespace Stations.Viewmodel
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDatasource<Station> Datasource => DependencyService.Get<IDatasource<Station>>();
+        public IDatasource<StationViewModel> Datasource => DependencyService.Get<IDatasource<StationViewModel>>();
+        public StationService stationService = new StationService();
 
 		string _title = string.Empty;
 		public string Title

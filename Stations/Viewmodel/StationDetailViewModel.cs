@@ -14,12 +14,12 @@ namespace Stations
     {
         public ILocationService locationService = DependencyService.Get<ILocationService>();
 
-        public StationDetailViewModel(Station station)
+        public StationDetailViewModel(StationViewModel station)
         {
             this.Model = station;
         }
 
-        Station Model { get; set; }
+        StationViewModel Model { get; set; }
 
         public String Name
         {
@@ -35,7 +35,7 @@ namespace Stations
         {
             get 
             { 
-                return Math.Round(Model.Coordinate.Latitude, 2).ToString(); 
+                return Math.Round(Model.latitude, 2).ToString(); 
             }
         }
 
@@ -43,7 +43,7 @@ namespace Stations
         {
             get 
             {
-                return Math.Round(Model.Coordinate.Longitude, 2).ToString(); 
+                return Math.Round(Model.longitude, 2).ToString(); 
             }
         }
 

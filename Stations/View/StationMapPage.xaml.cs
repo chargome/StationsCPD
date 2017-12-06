@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Stations.Model;
+using Stations.Service;
 using Stations.Viewmodel;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
@@ -24,12 +25,24 @@ namespace Stations.View
             Map.IsShowingUser = true;
 
 
-            ToolbarItems.Add(new ToolbarItem("Refresh", "refresh.png", () =>
+            /*ToolbarItems.Add(new ToolbarItem("Refresh", "refresh.png", () =>
             {
                 Map.Pins.Clear();
                 AddPinsFromList();
                 MoveMapToCurrentPosition();
             }));
+
+            /*ToolbarItems.Add(new ToolbarItem("Cancel", "cancel.png", () =>
+            {
+                // :(
+            }));*/
+
+            MessagingCenter.Subscribe<ILocationService, Coordinate>(this, "deviceLocation", (sender, coordinate) =>
+            {
+                //System.Diagnostics.Debug.WriteLine("Received location: " 
+                // + coordinate.Latitude + coordinate.Longitude);
+                MoveMapToCurrentPosition();
+            });
         }
 
         private void MoveMapToCurrentPosition()
@@ -81,10 +94,10 @@ namespace Stations.View
 
         private void AddPinsFromList()
         {
-            foreach(Station station in viewModel.StationList)
+            foreach(StationViewModel station in viewModel.StationList)
             {
-                var position = new Position(station.Coordinate.Latitude, 
-                                            station.Coordinate.Longitude);
+                var position = new Position(station.latitude, 
+                                            station.longitude);
                 
 
                 var customPin = new CustomPin()

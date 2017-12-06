@@ -15,11 +15,21 @@ namespace Stations.View
 
             var listPage = new NavigationPage(new StationListPage(listViewModel));
             listPage.Title = "List";
-            listPage.Icon = "tab_list.png";
+
 
             var mapPage = new NavigationPage(new StationMapPage(listViewModel));
             mapPage.Title = "Map";
-            mapPage.Icon = "tab_map.png";
+
+
+            // check if app runs on iOS and set icons accordingly
+            switch(Device.RuntimePlatform)
+            {
+                case Device.iOS:
+                    listPage.Icon = "tab_list.png";
+                    mapPage.Icon = "tab_map.png";
+                    break;
+            }
+
 
             Children.Add(listPage);
             Children.Add(mapPage);

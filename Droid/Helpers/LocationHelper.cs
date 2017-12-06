@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace Stations.Droid.Helpers
 {
-    public class LocationHelper : ILocationListener
+    public class LocationHelper : Java.Lang.Object, ILocationListener
     {
         LocationManager locationManager;
         string provider = LocationManager.GpsProvider;

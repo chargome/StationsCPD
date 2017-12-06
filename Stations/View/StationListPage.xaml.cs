@@ -44,7 +44,7 @@ namespace Stations.View
 
 		async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
 		{
-			var item = args.SelectedItem as Station;
+			var item = args.SelectedItem as StationViewModel;
 
 			if (item == null)
 				return;

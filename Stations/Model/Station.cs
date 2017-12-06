@@ -1,52 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using SQLite;
 using Xamarin.Forms;
 
 namespace Stations.Model
 {
-    public class Station : INotifyPropertyChanged
+    [Table("Station")]
+    public class Station
     {
-        public Station(int id, String name, Coordinate cdn, String lines)
+        public Station(int id, String name, double lat, double lon, String lines)
         {
             this.Id = id;
             this.Name = name;
-            this.Coordinate = cdn;
+            this.latitude = lat;
+            this.longitude = lon;
             this.Lines = lines;
         }
 
         public Station(){}
 
+        [PrimaryKey, AutoIncrement, Column("_id")]
         public int Id { get; set; }
+        [Column("name")]
         public String Name { get; set; }
-        public Coordinate Coordinate { get; set; }
+        [Column("latitude")]
+        public double latitude { get; set; }
+        [Column("longitude")]
+        public double longitude { get; set; }
+
+        [Column("lines")]
         public String Lines { get; set; }
-        //public List<Line> Lines { get; set; }
-
-        // todo: create viewmodel for station
-        double _distance;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public double Distance { 
-        
-            get
-            {
-                return _distance;
-            }
-
-            set
-            {
-                _distance = value;
-                OnPropertyChanged(nameof(Distance));
-            }
-        }
-
-        public String ImageSource { get; set; }
 
 
         override 
@@ -54,7 +38,7 @@ namespace Stations.Model
         {
             return "id: " + Id +
                 ", \nName: " + Name + 
-                ", \nCoordinates: " + Coordinate.Latitude + " " + Coordinate.Longitude +
+                ", \nCoordinates: " + latitude + " " + longitude +
                 ", \nLines: " + Lines;    
         }
 

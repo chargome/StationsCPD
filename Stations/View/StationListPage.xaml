@@ -31,8 +31,8 @@
                       HasUnevenRows="true"
                       ItemsSource="{Binding StationList}"
                       ItemSelected="OnItemSelected"
-                      IsPullToRefreshEnabled="true"
-                      RefreshCommand="{Binding RefreshCommand}"
+                      IsPullToRefreshEnabled="false"
+                      RefreshCommand="{Binding UpdateCommand}"
                       IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                       >
                 <ListView.ItemTemplate>

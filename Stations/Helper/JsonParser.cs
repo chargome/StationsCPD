@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Stations.Helper;
 using Stations.Model;
+using Stations.Persistence;
 using Stations.Service;
 using Stations.Settings;
+using Stations.Viewmodel;
 using Xamarin.Forms;
 
 namespace Stations
@@ -18,10 +21,10 @@ namespace Stations
 
 
         // Takes JSON string as argument and converts it to .NET object
-        public ObservableCollection<Station> DeserializeStations(String strJSON)
+        public ObservableCollection<StationViewModel> DeserializeStations(String strJSON)
         {
-			ObservableCollection<Station> allStations = new ObservableCollection<Station>();
-            ObservableCollection<Station> finalStations = new ObservableCollection<Station>();
+            ObservableCollection<StationViewModel> allStations = new ObservableCollection<StationViewModel>();
+            ObservableCollection<StationViewModel> finalStations = new ObservableCollection<StationViewModel>();
 
             var testObject = JsonConvert.DeserializeObject<dynamic>(strJSON);
 
@@ -38,7 +41,8 @@ namespace Stations
                 double lon = f.geometry.coordinates[0];
 
                 foreach (var station in allStations)
-                {   if(name.Equals(station.Name))
+                {   
+                    if(name.Equals(station.Name))
 					{
 						isRedundant = true;
 
@@ -53,15 +57,16 @@ namespace Stations
                 if(!isRedundant)
                 {
 					Station model = new Station
-                        (id, name, new Coordinate(lat, lon), lines);
-                    
-					allStations.Add(model);        
+                        (id, name,lat, lon, lines);
+
+                    StationViewModel viewModel = new StationViewModel(model);
+					allStations.Add(viewModel);        
                 }
             }
 
 
             char[] criteria = new char[2];
-
+                
 
             // Filter from settings
             if(SystemSettings.MetroVisible)
@@ -105,6 +110,93 @@ namespace Stations
 
 			return finalStations;
 
+        }
+
+        public async Task<bool> UpdateDatabaseAsync(string jsonResponse)
+        {
+            var items = await StationDatabase.GetInstance.GetItemsAsync();
+            ObservableCollection<Station> stationsfromDb = new ObservableCollection<Station>(items);
+            ObservableCollection<Station> allStations = new ObservableCollection<Station>();
+            var stationsFromApi = JsonConvert.DeserializeObject<dynamic>(jsonResponse);
+            bool dbGotUpdate = false;
+
+
+            // parse all stations from api call and check for redundancy
+            foreach (var station in stationsFromApi.features)
+            {
+                bool isRedundant = false;
+
+                // cache JSON data
+                int id = station.properties.OBJECTID;
+                string name = station.properties.HTXT.ToString();
+                string lines = station.properties.HLINIEN.ToString();
+                double lat = station.geometry.coordinates[1];
+                double lon = station.geometry.coordinates[0];
+
+                foreach (var allStation in allStations)
+                {
+                    if (name.Equals(allStation.Name))
+                    {
+                        isRedundant = true;
+
+                        if (!allStation.Lines.Contains(lines))
+                        {
+                            allStation.Lines += ", " + lines;
+                        }
+                    }
+                }
+
+                //create new station if does not exist yet
+                if (!isRedundant)
+                {
+
+                    //var old = lines.Split(',').
+                    Station model = new Station
+                        (id, name, lat, lon, lines);
+                    
+                    allStations.Add(model);
+                }
+            }
+
+
+            // check for every station if needs to be inserted or updated 
+            foreach(Station newStation in allStations)
+            {
+                bool isInDb = false;
+
+                foreach (Station oldStation in stationsfromDb)
+                {
+                    if (oldStation.Id == newStation.Id)
+                    {
+                        isInDb = true;
+
+                        if (oldStation != newStation)
+                        {
+                            await StationDatabase.GetInstance.UpdateItemAsync(newStation);
+                            dbGotUpdate = true;
+                        }
+                    }
+                }
+
+                if (!isInDb)
+                {
+                    await StationDatabase.GetInstance.SaveItemAsync(newStation);
+                    dbGotUpdate = true;
+                }
+            }
+
+
+            // check for items that need to be deleted
+            foreach (Station station in stationsfromDb)
+            {
+                if (!allStations.Contains(station))
+                {
+                    await StationDatabase.GetInstance.DeleteItem(station);
+                    dbGotUpdate = true;
+                }
+            }
+
+            return dbGotUpdate;
         }
     }
 }
