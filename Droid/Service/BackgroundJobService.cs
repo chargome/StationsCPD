@@ -5,7 +5,7 @@ using Firebase.JobDispatcher;
 namespace Stations.Droid.Service
 {
 
-    [Service(Name = "Stations.Backgroundservice")]
+    [Service(Name = "at.technikumwien.cgo.Stations.Backgroundservice")]
     [IntentFilter(new[] { FirebaseJobServiceIntent.Action })]
     public class BackgroundJobService : JobService
     {

@@ -25,7 +25,10 @@ namespace Stations.View
 		{
 			base.OnAppearing();
 
-			if (viewModel.StationList.Count == 0)
+
+
+
+            if (viewModel.StationList.Count == 0)
             {
                 viewModel.RefreshCommand.Execute(null); 
             }

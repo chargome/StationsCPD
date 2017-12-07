@@ -20,7 +20,7 @@ namespace Stations
             //MainPage = new NavigationPage(new View.StationListPage());
         }
 
-        // todo xaml compilation here
+
 
         protected override void OnStart()
         {
